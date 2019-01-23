@@ -1,5 +1,6 @@
 // 客户端会将`path`等模块打包到`bundle.js`，而服务器端不会，所以需要指定`target`
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   target: 'node', // 指定打包的代码是在服务器端还是客户端
@@ -9,6 +10,7 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build')
   },
+  externals: [nodeExternals()],
   module: {
     rules: [
       {
@@ -19,7 +21,7 @@ module.exports = {
           // 添加`@babel/preset-react`和`@babel/preset-stage-0`依赖
           presets: [
             '@babel/preset-react',
-            '@babel/preset-stage-0',
+            // '@babel/preset-stage-0',
             [
               // 根据环境做一些适配，添加`@babel/preset-env`依赖
               '@babel/preset-env',

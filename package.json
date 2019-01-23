@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node ./src/index.js"
+    "dev": "npm-run-all --parallel dev:**",
+    "dev:start": "nodemon --watch build --exec node \"./build/bundle.js\"",
+    "dev:build": "webpack --config ./webpack.server.js --watch"
   },
   "dependencies": {
     "@babel/core": "^7.2.2",
@@ -13,8 +15,13 @@
     "@babel/preset-stage-0": "^7.0.0",
     "babel-loader": "^8.0.5",
     "express": "^4.16.4",
+    "global": "^4.3.2",
+    "nodemon": "^1.18.9",
+    "npm-run-all": "^4.1.5",
     "react": "^16.7.0",
+    "react-dom": "^16.7.0",
     "webpack": "^4.28.4",
-    "webpack-cli": "^3.2.1"
+    "webpack-cli": "^3.2.1",
+    "webpack-node-externals": "^1.7.2"
   }
 }
