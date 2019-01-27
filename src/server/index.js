@@ -1,19 +1,26 @@
+/**
+ * 服务端渲染
+ * `React`代码运行在服务器上，消耗的是服务器的性能
+ */
+
 import express from 'express';
-import Home from './container/Home';
 import React from 'react';
+import { StaticRouter } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
-
-// 客户端渲染
-// `React`代码运行在浏览器上，消耗的是浏览器的性能
-// 首屏加载速度慢，不利于`SEO`，禁用`JS`后无法使用
-
-// 服务端渲染
-// `React`代码运行在服务器上，消耗的是服务器的性能
+import Routes from '../Routes';
 
 const app = express();
-const content = renderToString(<Home />);
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
+  const App = () => (
+    // 路由使用`StaticRouter`
+    <StaticRouter location={req.path} context={{}}>
+      <Routes />
+    </StaticRouter>
+  );
+  const content = renderToString(<App />);
+
   res.send(`
     <!DOCTYPE html>
     <html lang="en">
@@ -24,7 +31,8 @@ app.get('/', (req, res) => {
       <title>SSR</title>
     </head>
     <body>
-      ${content}
+      <div id="root">${content}</div>
+      <script src="/index.js"></script>
     </body>
     </html>
   `);
