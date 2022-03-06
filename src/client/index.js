@@ -6,15 +6,21 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import Routes from '../Routes';
-import getStore from '../store';
+import routes from '../routes';
+import { getClientStore } from '../store';
+
+const store = getClientStore();
 
 const App = () => (
-  <Provider store={getStore()}>
+  <Provider store={store}>
     <BrowserRouter>
-      <Routes />
+      <Switch>
+        {routes.map(route => (
+          <Route {...route} />
+        ))}
+      </Switch>
     </BrowserRouter>
   </Provider>
 );
