@@ -4,6 +4,7 @@
  */
 
 import express from 'express';
+import proxy from 'express-http-proxy';
 import { matchRoutes } from 'react-router-config';
 import routes from '../routes';
 import { getStore } from '../store';
@@ -12,6 +13,15 @@ import render from './utils';
 const app = express();
 
 app.use(express.static('public'));
+
+app.use(
+  '/users',
+  proxy('https://api.github.com', {
+    proxyReqPathResolver: req => {
+      return '/users' + req.url;
+    }
+  })
+);
 
 app.get('*', (req, res) => {
   const store = getStore();

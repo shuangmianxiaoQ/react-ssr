@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import Header from '../../components/Header';
 import { getHomeList } from './store/actions';
 
 // 同构：一套`React`代码在服务器端执行一次渲染出页面，
@@ -16,10 +15,13 @@ const Home = ({ list, getHomeList }) => {
 
   return (
     <div>
-      <Header />
       <div>welcome to home!</div>
       {list.map(item => (
-        <div key={item.id}>{item.name}</div>
+        <div key={item.id}>
+          <img src={item.avatar_url} width={16} />
+          {' '}
+          <a href={item.html_url}>{item.login}</a>
+        </div>
       ))}
       <button onClick={() => alert('clcik')}>click</button>
     </div>

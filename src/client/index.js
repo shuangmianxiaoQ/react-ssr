@@ -6,7 +6,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import routes from '../routes';
 import { getClientStore } from '../store';
@@ -16,11 +17,7 @@ const store = getClientStore();
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <Switch>
-        {routes.map(route => (
-          <Route {...route} />
-        ))}
-      </Switch>
+      <Switch>{renderRoutes(routes)}</Switch>
     </BrowserRouter>
   </Provider>
 );

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { CHANGE_LIST } from './constants';
 
 const changeList = list => ({
@@ -7,8 +6,8 @@ const changeList = list => ({
 });
 
 export const getHomeList = () => {
-  return dispatch =>
-    axios.get('https://jsonplaceholder.typicode.com/users').then(res => {
+  return (dispatch, getState, axiosInstance) =>
+    axiosInstance.get('/users/shuangmianxiaoQ/followers').then(res => {
       dispatch(changeList(res.data));
     });
 };
