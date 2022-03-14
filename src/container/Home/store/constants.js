@@ -1,1 +1,1 @@
-export const CHANGE_LIST = 'HOME/CHANGE_LIST';
+export const CHANGE_USER_INFO = 'HOME/CHANGE_USER_INFO';

@@ -32,12 +32,22 @@ app.get('*', (req, res) => {
 
   matchedRoutes.forEach(item => {
     if (item.route.loadData) {
-      promises.push(item.route.loadData(store));
+      const promise = new Promise(resolve => {
+        item.route.loadData(store).then(resolve).catch(resolve);
+      });
+      promises.push(promise);
     }
   });
 
   Promise.all(promises).then(() => {
-    res.send(render(store, routes, req));
+    const context = {};
+    const html = render(store, routes, req, context);
+
+    if (context.status === 404) {
+      res.status(404);
+    }
+
+    res.send(html);
   });
 });
 

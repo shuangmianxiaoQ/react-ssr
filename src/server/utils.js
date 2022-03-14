@@ -4,10 +4,10 @@ import { StaticRouter, Switch } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 
-const render = (store, routes, req) => {
+const render = (store, routes, req, context) => {
   const content = renderToString(
     <Provider store={store}>
-      <StaticRouter location={req.path} context={{}}>
+      <StaticRouter location={req.path} context={context}>
         <Switch>
           {renderRoutes(routes)}
         </Switch>

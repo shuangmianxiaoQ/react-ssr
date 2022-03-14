@@ -1,13 +1,14 @@
-import { CHANGE_LIST } from './constants';
+import { CHANGE_USER_INFO } from './constants';
 
-const changeList = list => ({
-  type: CHANGE_LIST,
-  list
+const changeUserInfo = info => ({
+  type: CHANGE_USER_INFO,
+  userInfo: info
 });
 
-export const getHomeList = () => {
-  return (dispatch, getState, axiosInstance) =>
-    axiosInstance.get('/users/shuangmianxiaoQ/followers').then(res => {
-      dispatch(changeList(res.data));
+export const getUserInfo = () => {
+  return (dispatch, getState, axiosInstance) => {
+    return axiosInstance.get('/users/shuangmianxiaoQ').then(res => {
+      dispatch(changeUserInfo(res.data));
     });
+  };
 };

@@ -1,10 +1,10 @@
 import App from './App';
 import Home from './container/Home';
-import Login from './container/Login';
+import Followers from './container/Followers';
+import NotFound from './container/NotFound';
 
 const routes = [
   {
-    key: 'app',
     path: '/',
     component: App,
     routes: [
@@ -16,9 +16,13 @@ const routes = [
         loadData: Home.loadData
       },
       {
-        key: 'login',
-        path: '/login',
-        component: Login
+        key: 'followers',
+        path: '/followers',
+        component: Followers,
+        loadData: Followers.loadData
+      },
+      {
+        component: NotFound
       }
     ]
   }
