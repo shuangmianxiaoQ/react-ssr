@@ -1,0 +1,11 @@
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  margin-right: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}

@@ -2,20 +2,26 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getFollowersList } from './store/actions';
 
-const Followers = ({ list, getFollowersList }) => {
+import styles from './style.css';
+
+const Followers = ({ list, getFollowersList, staticContext }) => {
   useEffect(() => {
     if (!list.length) {
       getFollowersList();
     }
   }, []);
 
+  if (staticContext) {
+    staticContext.cssStyle = styles._getCss();
+  }
+
   return (
     <div>
       <div>Followers</div>
       <div>
         {list.map(item => (
-          <div key={item.id}>
-            <img src={item.avatar_url} width={18} style={{ marginRight: 4, borderRadius: '50%' }} />
+          <div key={item.id} className={styles.item}>
+            <img src={item.avatar_url} className={styles.avatar} />
             <a href={item.html_url} target="_blank">
               {item.login}
             </a>

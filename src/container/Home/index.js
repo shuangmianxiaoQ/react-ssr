@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getUserInfo } from './store/actions';
 
+import styles from './style.css';
+
 // 同构：一套`React`代码在服务器端执行一次渲染出页面，
 // 然后在客户端再执行一次，使得点击事件等有效
 
-const Home = ({ userInfo, getUserInfo }) => {
+const Home = ({ userInfo, getUserInfo, staticContext }) => {
   // 服务器端不执行componentDidMount，所以userInfo内容为空
   useEffect(() => {
     if (!userInfo.name) {
@@ -14,12 +16,16 @@ const Home = ({ userInfo, getUserInfo }) => {
     }
   }, []);
 
+  if (staticContext) {
+    staticContext.cssStyle = styles._getCss();
+  }
+
   return (
     <div>
       <div>welcome to home!</div>
       <div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={userInfo.avatar_url} width={18} style={{ marginRight: 4, borderRadius: '50%' }} />
+        <div className={styles.info}>
+          <img src={userInfo.avatar_url} className={styles.avatar} />
           <a href={userInfo.html_url} target="_blank">
             {userInfo.name}
           </a>

@@ -8,12 +8,12 @@ const render = (store, routes, req, context) => {
   const content = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.path} context={context}>
-        <Switch>
-          {renderRoutes(routes)}
-        </Switch>
+        <Switch>{renderRoutes(routes)}</Switch>
       </StaticRouter>
     </Provider>
   );
+
+  const cssStr = context.cssStyle ?? '';
 
   return `
     <!DOCTYPE html>
@@ -23,6 +23,7 @@ const render = (store, routes, req, context) => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>SSR</title>
+      <style>${cssStr}</style>
     </head>
     <body>
       <div id="root">${content}</div>
