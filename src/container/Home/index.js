@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getUserInfo } from './store/actions';
@@ -22,6 +23,10 @@ const Home = ({ userInfo, getUserInfo, staticContext }) => {
 
   return (
     <div>
+      <Helmet>
+        <title>SSR Home</title>
+        <meta name="description" content="SSR Home Page" />
+      </Helmet>
       <div>welcome to home!</div>
       <div>
         <div className={styles.info}>

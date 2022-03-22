@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { getFollowersList } from './store/actions';
 
@@ -17,6 +18,10 @@ const Followers = ({ list, getFollowersList, staticContext }) => {
 
   return (
     <div>
+      <Helmet>
+        <title>SSR Followers</title>
+        <meta name="description" content="SSR Followers Page" />
+      </Helmet>
       <div>Followers</div>
       <div>
         {list.map(item => (
