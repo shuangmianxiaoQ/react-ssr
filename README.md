@@ -1,2 +1,2 @@
 # react-ssr
-React服务端渲染学习
+React服务端渲染原理
